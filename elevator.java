@@ -6,9 +6,9 @@ public class elevator
 {
     private int current_floor = 0;
     private int occupants = 0;
-    private int top_floor = 7;
+    private int top_floor = 6;
     private int bottom_floor = 0;
-    private int capacity = 5;
+    private int capacity = 9;
     private boolean goingUp = true;
 
     /**
@@ -16,6 +16,12 @@ public class elevator
      */
     public elevator()
     {
+    }
+
+    public elevator(int floor, boolean up)
+    {
+        current_floor = floor;
+        goingUp = up;
     }
 
     /**
@@ -29,7 +35,7 @@ public class elevator
         }
         else {
             /* else display error message*/
-            System.out.println("Sorry you are at the top!");
+            // System.out.println("Sorry you are at the top!");
             goingUp = false;
             descend();
         }
@@ -46,7 +52,7 @@ public class elevator
         }
         else {
             /* else display error message*/
-            System.out.println("Sorry you are at the bottom!");
+            // System.out.println("Sorry you are at the bottom!");
             goingUp = true;
             ascend();
         }
@@ -58,12 +64,14 @@ public class elevator
     public void board(int newPassengers)
     {
         /* */
-        if (occupants < capacity) {
+        System.out.print(" +" + newPassengers + " ");
+        if (newPassengers <= capacity - occupants) {
             occupants = occupants + newPassengers;
         }
         else {
+            occupants = capacity;
             /* else display error message*/
-            System.out.println("Sorry lift is full!");
+            // System.out.println("Sorry lift is full!");
         }
     }
 
@@ -73,12 +81,13 @@ public class elevator
     public void exit(int leavingPassengers)
     {
         /* */
+        System.out.print(" -" + leavingPassengers + " ");
         if (occupants > 0) {
             occupants = occupants - leavingPassengers;
         }
         else {
             /* else display error message*/
-            System.out.println("Sorry lift is empty!");
+            // System.out.println("Sorry lift is empty!");
         }
     }
 
@@ -105,7 +114,7 @@ public class elevator
     {
         return occupants;
     }
-    
+
     public void moveLift() {
         if (goingUp == true) {
             ascend();
