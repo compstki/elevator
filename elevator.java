@@ -61,14 +61,18 @@ public class elevator
     /**
      * lift is boarded by one more person up to the max
      */
-    public void board(int newPassengers)
+    public void board(int[] newPassengers)
     {
         /* */
-        System.out.print(" +" + newPassengers + " ");
-        if (newPassengers <= capacity - occupants) {
-            occupants = occupants + newPassengers;
+        //System.out.print(" +" + newPassengers + " ");
+        if (newPassengers[current_floor] <= capacity - occupants) {
+            occupants = occupants + newPassengers[current_floor];
+            System.out.println("+" + newPassengers[current_floor]);
+            newPassengers[current_floor] = 0;
         }
         else {
+            System.out.println("+" + (capacity - occupants));
+            newPassengers[current_floor] = newPassengers[current_floor] + occupants - capacity;
             occupants = capacity;
             /* else display error message*/
             // System.out.println("Sorry lift is full!");
@@ -81,7 +85,7 @@ public class elevator
     public void exit(int leavingPassengers)
     {
         /* */
-        System.out.print(" -" + leavingPassengers + " ");
+        System.out.print("-" + leavingPassengers);
         if (occupants > 0) {
             occupants = occupants - leavingPassengers;
         }
@@ -96,7 +100,12 @@ public class elevator
      */
     public void displayLift()
     {
-        System.out.println("Floor : " + current_floor + " People : " + occupants);
+        System.out.print("\t");
+        //System.out.println("Floor : " + current_floor + " People : " + occupants);
+        for (int i = 0; i<current_floor; i++) {
+            System.out.print("\t");
+        }
+        System.out.print("["+ occupants + "]");
     }
 
     /**
